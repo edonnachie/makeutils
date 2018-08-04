@@ -33,7 +33,7 @@ extract_rules <- function(mk){
 #' @importFrom tidyr unnest
 #' @importFrom tidyr separate
 #' @importFrom tidyr separate_rows
-#' @importFrom purr map
+#' @importFrom purrr map
 parse_rule <- function(rule) {
   tibble::tibble(rule = rule) %>%
     tidyr::separate(rule, sep = ":",
@@ -65,7 +65,7 @@ parse_rule <- function(rule) {
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate
 #' @importFrom tidyr unnest
-#' @importFrom purr map
+#' @importFrom purrr map
 #' @export
 parse_makefile <- function(makefile = "Makefile") {
   mk <- readLines(makefile)
