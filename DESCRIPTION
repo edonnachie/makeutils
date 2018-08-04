@@ -5,7 +5,7 @@ Description: Extract rules from a Makefile as a tidy data.frame for further  pro
 Authors@R: c(
   person("Ewan", "Donnachie", , "ewan@donnachie.net", c("aut", "cre"))
   )
-License: GPL-3
+License: MIT + file LICENSE
 URL: https://github.com/edonnachie/makeutils
 BugReports: https://github.com/edonnachie/makeutils/issues
 Encoding: UTF-8
