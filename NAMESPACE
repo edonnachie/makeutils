@@ -2,6 +2,7 @@
 
 export(parse_makefile)
 export(plot_makefile)
+export(use_make)
 importFrom(dplyr,filter)
 importFrom(dplyr,mutate)
 importFrom(igraph,graph_from_data_frame)

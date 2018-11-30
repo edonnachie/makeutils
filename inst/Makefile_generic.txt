@@ -1,0 +1,66 @@
+################################################################################
+## Project rules
+################################################################################
+
+
+
+
+
+################################################################################
+## Setup
+################################################################################
+
+# Where to find R
+#RSCRIPT = "C:/Program Files/R/R-3.4.2/bin/x64/Rscript" --verbose
+RSCRIPT = "Rscript" --verbose
+
+
+
+################################################################################
+## Automatic rules ----
+################################################################################
+
+# Preliminary: Ensure log directory is present
+_dummy := $(shell mkdir -p log)
+
+# Note: the % expansion enables targets and prerequisites to be located
+# in subdirectories (e.g. "data/raw"" or "reports/final")
+
+
+# Target of an R script is a dummy file
+# Format: log/file.Rtarget: R/file.R
+log/%.Rtarget:
+	$(RSCRIPT) -e 'source("$<", encoding = "UTF-8", echo = TRUE)' > log/$(@F).Rout
+	touch $@
+
+# Target of an R script is a data file
+# Format: data/data.rds: R/data.R
+data/%.rds:
+	$(RSCRIPT) -e 'source("$<", encoding = "UTF-8", echo = TRUE)' > log/$(@F).Rout
+
+data/%.csv:
+	$(RSCRIPT) -e 'source("$<", encoding = "UTF-8", echo = TRUE)' > log/$(@F).Rout
+
+
+# Reports using Rmarkdown (Target is the report itself)
+reports/%.html: reports/%.Rmd
+	$(RSCRIPT) -e 'rmarkdown::render("$<", encoding = "UTF-8", output_options = list(cache.rebuild = TRUE))' > log/$*.Rout
+
+reports/%.pdf: reports/%.Rmd
+	$(RSCRIPT) -e 'rmarkdown::render("$<", encoding = "UTF-8", output_options = list(cache.rebuild = TRUE))' > log/$*.Rout
+
+reports/%.docx: reports/%.Rmd
+	$(RSCRIPT) -e 'rmarkdown::render("$<", encoding = "UTF-8", output_options = list(cache.rebuild = TRUE))' > log/$*.Rout
+
+
+# Phony target to find and make all markdown (Rmd) reports
+RMD = $(wildcard reports/*.Rmd)
+REPORTS = $(addsuffix .html, $(basename $(RMD)))
+
+.PHONY : reports
+reports : $(REPORTS) data
+
+# A basic clean routine
+.PHONY : clean
+clean :
+	rm -f log/*
