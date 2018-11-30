@@ -1,5 +1,5 @@
 Package: makeutils
-Version: 0.0.0.9000
+Version: 0.0.0.9100
 Title: Utility functions to parse and work with Makefiles
 Description: Extract rules from a Makefile as a tidy data.frame for further  processing or inspection.
 Authors@R: c(
@@ -12,3 +12,5 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 RoxygenNote: 6.1.0
+Imports: 
+    magrittr
