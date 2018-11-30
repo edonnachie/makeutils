@@ -12,5 +12,6 @@ Output of file.copy, signifying success of operation
 \description{
 This function is inspired by the `usethis` package. It copies a Makefile
 template to the project root, containing generic rules for building R
-projects.
+projects. If a Makefile already exists, the template is created as
+`Makefile_template`.
 }
